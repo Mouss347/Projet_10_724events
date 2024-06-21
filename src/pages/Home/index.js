@@ -19,10 +19,11 @@ const Page = () => {
       <Menu />
     </header>
     <main>
-      <section className="SliderContainer" id="nos-services">
+      <section className="SliderContainer">
         <Slider />
       </section>
-      <section className="ServicesContainer">
+      <section className="ServicesContainer" id="nos-services">
+{/* ajout des id pour l'ancre */}
         <h2 className="Title">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
@@ -124,6 +125,7 @@ const Page = () => {
               date={new Date(last.date)}
               small
               label={last.type}
+              // ajout du type a afficher
             />
           )
         }

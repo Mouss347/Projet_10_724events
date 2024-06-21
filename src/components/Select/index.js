@@ -19,10 +19,11 @@ const Select = ({
   
   
   // Correction de la fonction changeValue
+  // Fonction pour changer la valeur sélectionnée et mettre à jour l'état de collapse
   const changeValue = (newValue) => {
-    onChange(newValue);
-    setValue(newValue);
-    setCollapsed(true);
+    onChange(newValue); // Appelle onChange pour informer le parent du changement de valeur avec newValue
+    setValue(newValue); // Met à jour la valeur sélectionnée dans le composant avec setValue(newValue).
+    setCollapsed(true); // Change l'état de collapsed à true pour fermer le menu déroulant après la sélection.
   };
 
 
@@ -73,6 +74,8 @@ const Select = ({
   );
 };
 
+
+// Composant flèche SVG utilisé pour indiquer l'état du menu déroulant
 const Arrow = () => (
   <svg
     width="21"
@@ -88,6 +91,8 @@ const Arrow = () => (
   </svg>
 );
 
+
+// Propriétés attendues par le composant Select pour la validation
 Select.propTypes = {
   selection: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func,
@@ -97,6 +102,8 @@ Select.propTypes = {
   type: PropTypes.string,
 };
 
+
+// Valeurs par défaut pour les propriétés non fournies au composant Select
 Select.defaultProps = {
   onChange: () => null,
   titleEmpty: false,

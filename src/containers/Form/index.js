@@ -5,8 +5,9 @@ import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 500); })
-// reduction du délai de l'api de 1000 à 500 millisecondes
+// Fonction qui simule une API de contact avec un délai de 1000, reduit a 500 millisecondes
 const Form = ({ onSuccess, onError }) => {
+  // État local pour gérer l'indicateur de chargement d'envoi du formulaire
   const [sending, setSending] = useState(false);
   const sendContact = useCallback(
     async (evt) => {

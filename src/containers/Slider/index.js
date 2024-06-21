@@ -7,12 +7,11 @@ import "./style.scss";
 const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
-  // console.log(data.events.events.id)
   const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtB.date) < new Date(evtA.date) ? -1 : 1
+    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
   );
 
-// du plus ancien au plus récent en inversant evtB et evA
+// du plus ancien au plus récent en inversant l'ordre d'affichage
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,9 +22,10 @@ const Slider = () => {
     return () => clearInterval(interval);
   }, [byDateDesc?.length]);
 
-  // utilisation de useEffect pour crée un avancement automatique toutes les 5 seconde 
-  // si l'index atteint la derniere alors il revient a 0.
-  // utilisation de clearInterval pour permettre d'areter setinterval actuel apres 5 secondes
+  // utilisation de useEffect pour crée un avancement automatique toutes les 5 secondes 
+  // Si `prevIndex` est égal à la longueur de `byDateDesc` moins 1,
+  // alors on revient à l'index 0, sinon on incrémente l'index de 1.
+  // utilisation de clearInterval pour stoper setinterval au cas ou le composant est retirer du dom sa ne produit aps d'erreur
 
   return (
     <div className="SlideCardList">
@@ -47,8 +47,9 @@ const Slider = () => {
             </div>
           </div>
           ))}
-{/* deplacement de cette div pour l'insérer a l'exterieur de la boucle map */}
+{/* deplacement de la div SlideCard__paginationContainer pour l'insérer a l'exterieur de la boucle map */}
           <div className="SlideCard__paginationContainer">
+{/* pagination = boulettes points */}
             <div className="SlideCard__pagination">
               {byDateDesc?.map((event, radioIdx) => (
                 <input 
@@ -58,7 +59,7 @@ const Slider = () => {
                   name="radio-button"
                   checked={index === radioIdx}
                   onChange={() => setIndex(radioIdx)}
-// onchange pour que les bouttons radio soient interactif 
+// Onchange pour que les bouttons radio soient interactif 
                 />
               ))}
             </div> 
