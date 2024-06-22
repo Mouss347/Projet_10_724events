@@ -39,6 +39,7 @@ export const DataProvider = ({ children }) => {
       setError(err);
     }
   }, []);
+
   useEffect(() => {
     if (data) return;
   // si data existe déja, sa veux dire que les données ont deja été charger
@@ -48,6 +49,7 @@ export const DataProvider = ({ children }) => {
   // cette fonction sera exécutée chaque fois que 'data' ou 'getData' changent  
   return (
     <DataContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
         error,
