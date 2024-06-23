@@ -1,41 +1,30 @@
-// Importation des hooks useCallback et useState depuis React
 import { useCallback, useState } from "react";
-
-// Importation des types de prop (prop-types) pour la validation des propriétés
 import PropTypes from "prop-types";
-
-// Importation des composants Field, Select, et Button depuis les composants locaux
 import Field, { FIELD_TYPES } from "../../components/Field";
 import Select from "../../components/Select";
 import Button, { BUTTON_TYPES } from "../../components/Button";
 
-// Fonction qui simule une API de contact avec un délai de 500 millisecondes
 const mockContactApi = () => new Promise((resolve) => { setTimeout(resolve, 500); })
 
-// Définition du composant Form qui prend onSuccess et onError comme propriétés
 const Form = ({ onSuccess, onError }) => {
-  // Déclaration d'un état local pour gérer l'indicateur de chargement du formulaire
   const [sending, setSending] = useState(false);
-
-  // Fonction sendContact utilisant useCallback pour éviter la recréation de la fonction à chaque rendu
   const sendContact = useCallback(
     async (evt) => {
-      evt.preventDefault(); // Empêche le rechargement de la page lors de la soumission du formulaire
-      setSending(true); // Active l'indicateur de chargement
+      evt.preventDefault(); 
+      setSending(true);
 
       try {
-        await mockContactApi(); // Attend la résolution de la promesse simulant l'appel API
-        setSending(false); // Désactive l'indicateur de chargement
-        onSuccess(); // Appelle la fonction onSuccess pour indiquer la réussite
+        await mockContactApi();
+        setSending(false);
+        onSuccess();
       } catch (err) {
-        setSending(false); // Désactive l'indicateur de chargement
-        onError(err); // Appelle la fonction onError pour indiquer l'erreur
+        setSending(false);
+        onError(err);
       }
     },
-    [onSuccess, onError] // Dépendances de useCallback : la fonction sera recréée si onSuccess ou onError changent
+    [onSuccess, onError]
   );
 
-  // Rendu du formulaire avec les champs et le bouton de soumission
   return (
     <form onSubmit={sendContact}>
       <div className="row">
@@ -66,17 +55,14 @@ const Form = ({ onSuccess, onError }) => {
   );
 };
 
-// Validation des types des propriétés du composant Form
 Form.propTypes = {
-  onError: PropTypes.func, // onError doit être une fonction
-  onSuccess: PropTypes.func, // onSuccess doit être une fonction
+  onError: PropTypes.func, 
+  onSuccess: PropTypes.func, 
 }
 
-// Valeurs par défaut pour les propriétés onError et onSuccess
 Form.defaultProps = {
-  onError: () => null, // Par défaut, onError ne fait rien
-  onSuccess: () => null, // Par défaut, onSuccess ne fait rien
+  onError: () => null, 
+  onSuccess: () => null, 
 }
 
-// Exportation du composant Form comme exportation par défaut
 export default Form;

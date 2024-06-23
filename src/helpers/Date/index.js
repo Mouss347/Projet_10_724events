@@ -14,5 +14,3 @@ export const MONTHS = {
 };
 
 export const getMonth = (date) => MONTHS[date.getMonth() +1];
-
-// ajout de +1

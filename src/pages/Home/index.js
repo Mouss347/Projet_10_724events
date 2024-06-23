@@ -13,8 +13,7 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData() // on recupere l'état last avec usedata dans dataContext
-  // console.log(last)
+  const {last} = useData()
   return <>
     <header>
       <Menu />
@@ -24,7 +23,6 @@ const Page = () => {
         <Slider />
       </section>
       <section className="ServicesContainer" id="nos-services">
-{/* ajout des id pour l'ancre */}
         <h2 className="Title">Nos services</h2>
         <p>Nous organisons des événements sur mesure partout dans le monde</p>
         <div className="ListContainer">
@@ -119,15 +117,13 @@ const Page = () => {
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
         {
-          last && ( // si last est récuperer exectuer ce qui entre ()
+          last && (
             <EventCard
               imageSrc={last.cover}
               title={last.title}
               date={new Date(last.date)}
               small
               label={last.type}
-              // ajout du type a afficher
-              // new date prend une date sous forme de texte et la transforme en une vraie date que JavaScript peut comprendre et utiliser.
             />
           )
         }
